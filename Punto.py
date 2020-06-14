@@ -1,0 +1,28 @@
+class Punto:
+    def __init__(self, i, j):
+        self.i = i
+        self.j = j
+        self.radio = 10
+
+    def GetPuntos(self):
+        return (self.i, self.j)  # Returns
+
+    def GetRadio(self):
+        return self.radio
+
+    def GetSvg(self):
+        l = []
+        for i in (1, -1):
+            for j in (1, -1):
+                l.append('<circle cx="' + str(self.j + j * self.radio) + '" cy="' + str(
+                    self.i + i * self.radio) + '" r="' + str(
+                    self.radio) + '" stroke="black" stroke-width="3" fill="black" />\n')
+        l.append('<circle cx="' + str(self.j) + '" cy="' + str(
+            self.i) + '" r="' + str(self.radio) + '" stroke="black" stroke-width="3" fill="white" />\n')
+        return l
+
+    def CalcularDistancia(self, punto):
+        i1 = self.i
+        j1 = self.j
+        i2, j2 = punto.GetPuntos()
+        return ((i1 - i2) ** 2 + (j1 - j2) ** 2) ** 0.5
