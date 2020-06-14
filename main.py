@@ -28,15 +28,10 @@ def InicializarSVG():
 def CrearPuntos(numPuntos=3):  # Cambias el valor para decidir cuantos puntos habrá
     l = []  # lista de puntos
     g = []  # matriz de adyacencia
-    """
     for i in range(0, numPuntos):
         l.append(Punto(randint(0, 900), randint(0, 1800)))  # Se crea un punto aleatorio
         EscribirLinea(l[-1].GetSvg())  # Se dibuja en SVG el punto creado
-        # sleep(0.25)#Se espera
-    """
-    p1 = Punto(1777, 799)
-    p2 = Punto(1146, 783)
-    l=[p1,p2]
+        sleep(0.25)#Se espera
     for i in l:
         EscribirLinea(i.GetSvg())
     for i in range(0, len(l)):
@@ -103,10 +98,6 @@ def Prim(g, l):
             aristas.sort(key=lambda x: x[2])  # Se ordenan las aristas por distancias
             visitados[linea[1]] = True
     input("end")
-
-
-
-
 
 InicializarSVG()
 sleep(1)
