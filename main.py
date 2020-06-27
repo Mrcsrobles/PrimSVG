@@ -1,6 +1,6 @@
 from DibujoSvg import Dibujo
 from Punto import Punto
-from ColaDePrioridad import Cola
+from FibonacciHeap import FH
 from random import randint
 from time import sleep
 from math import asin
@@ -50,10 +50,10 @@ def CrearCuadrícula(ancho, alto, numPuntos,dibujo):
                 g[j][i] = g[i][j]
     return l, g
 
-def SacarAristas(g, elem, visitados, aristas=Cola()):#Devuelve en una lista todas las aristas del elemento indicado
+def SacarAristas(g, elem, visitados, aristas=FH()):#Devuelve en una lista todas las aristas del elemento indicado
     for i in range(0, len(g[elem])):
         if not visitados[i]:
-            aristas.Añadir((elem, i, g[elem][i]))  # Se devuelve i,j,distancia
+            aristas.añadir((elem, i, g[elem][i]))  # Se devuelve i,j,distancia
     return aristas
 
 
@@ -82,7 +82,8 @@ def Prim(g, l,dibujo):
     visitados[0] = True
     aristas = SacarAristas(g, 0, visitados)
     while not all(visitados) and not aristas.IsEmpty():
-        linea = aristas.Popleft()
+        linea = aristas.extractmin()
+
         if not visitados[linea[1]]:
             dibujo.EscribirLinea(CrearLinea(l[linea[0]], l[linea[1]]), True)  # Se dibuja la linea que une los puntos
             # sleep(1)
@@ -104,9 +105,9 @@ def UnirTodo(g, l,dibujo):
 
 
 
-ancho = 10000
-alto = 10000
-puntos = 500
+ancho = 1000
+alto = 1000
+puntos = 5
 
 sleep(1)
 l, g ,d= CrearPuntos(ancho, alto, puntos)
