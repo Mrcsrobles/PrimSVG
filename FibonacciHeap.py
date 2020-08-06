@@ -5,11 +5,19 @@ class FH:
     def __init__(self):
         self.hijos = Cola()
         self.rangos = dict()
-
+        self.len=0
     def añadir(self, val):
         newTree = Tree(val, None)
         self.hijos.Añadir(newTree)
-
+        self.len+=1
+    def lengt(self):
+        return self.len
+        """
+        total=self.hijos.length()
+        for h in self.hijos.getCola():
+            total+=h.rangoAbsoluto()
+        return total
+        """
     def merge(self, newFH):
         self.hijos.merge(newFH.getHijos())
 
@@ -17,6 +25,7 @@ class FH:
         return self.hijos.IsEmpty()
 
     def extractmin(self):
+        self.len-=1
         minimunTree = self.hijos.Popleft()
         minimunVal = minimunTree.getFullData()
         hijos = minimunTree.getHijos()
@@ -51,8 +60,17 @@ class FH:
 class Tree:
     def __init__(self, val, padre=None):
         self.val = val
-        #self.padre = padre
+        # self.padre = padre
         self.hijos = []
+
+    def rangoAbsoluto(self):
+        if not self.hijos:
+            return 0
+        else:
+            total = len(self.hijos)
+            for h in self.hijos:
+                total += h.rangoAbsoluto()
+            return total
 
     def añadirHijo(self, elem):
         self.hijos.append(elem)
@@ -68,5 +86,3 @@ class Tree:
 
     def getRango(self):
         return len(self.hijos)
-
-

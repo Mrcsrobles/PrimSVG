@@ -1,5 +1,6 @@
 import webbrowser
 from time import sleep
+#import cairosvg
 
 
 class Dibujo:
@@ -45,4 +46,6 @@ class Dibujo:
 
     def Terminar(self):
         self.dibujo[2] = '<meta http-equiv="refresh" content="500">\n'
-        self.Mostrar()
+        self.Mostrar() #usa este para mostrar por navegador
+        #cairosvg.svg2png(bytestring=self.GetSvg(),write_to="dibujo.png")
+
